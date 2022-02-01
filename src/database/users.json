@@ -1,0 +1,37 @@
+[
+    {
+        "user_id": 0,
+        "name": "Admin",
+        "contact": "998903319575",
+        "admin": true,
+        "password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918"
+    },
+    {
+        "user_id": 1,
+        "first_name": "Bahodir",
+        "last_name": "Omonov",
+        "contact": "998903319575",
+        "user_job": "JavaScript Developer"
+    },
+    {
+        "user_id": 2,
+        "first_name": "Aziz",
+        "last_name": "Eshmatov",
+        "contact": "998903319575",
+        "user_job": "Fermer"
+    },
+    {
+        "user_id": 3,
+        "first_name": "Ali",
+        "last_name": "Vahobov",
+        "contact": "998903319575",
+        "user_job": "Backend Developer"
+    },
+    {
+        "user_id": 4,
+        "first_name": "MuhammadAli",
+        "last_name": "Eshonqulov",
+        "contact": "998915778969",
+        "user_job": "Spikker"
+    }
+]
