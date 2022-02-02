@@ -4,63 +4,35 @@ const GET = (request,response,next)=>{
 	try{
 		let adResponse = request.select('advertisement')
 		let userResponse = request.select('users')
-		let { pendding } = request.params
+		let { adminAd } = request.params
 		let result = []
-		let dateNow = new Date()
-		let year = dateNow.getFullYear()
-		let month = dateNow.getMonth()
-		let day = dateNow.getDate()
-		let hour = dateNow.getHours()
-		let minut = dateNow.getMinutes()
-		let write
 
-		for (let rek = 0; rek < adResponse.length; rek++){
-			if (adResponse[rek].date.split(' ')[0].split('/')[2] - year < 0){
-				let index = adResponse.findIndex(el => el.id == adResponse[rek].id)
+		for (let ad = 0; ad < adResponse.length; ad++){
+			let dateReversed = adResponse[ad].date.split(' ')[0].split('/')
+			let resultDate = dateReversed[1]+'/'+dateReversed[0]+'/'+dateReversed[2]+' '+adResponse[ad].date.split(' ')[1]
+			let dates = (new Date()) - (new Date(resultDate)).getTime()
+			if(dates > 0){
+				let index = adResponse.findIndex(el => el.id == adResponse[ad].id)
 				adResponse.splice(index,1)
-				rek = rek ==0 ? rek : rek - 1
-				write = 1
-			}
-			else if ((adResponse[rek].date.split(' ')[0].split('/')[2] - year == 0) && (adResponse[rek].date.split(' ')[0].split('/')[1] - (month+1) < 0)){
-				let index = adResponse.findIndex(el => el.id == adResponse[rek].id)
-				adResponse.splice(index,1)
-				rek = rek ==0 ? rek : rek - 1
-				write = 1
-			}
-			else if ((adResponse[rek].date.split(' ')[0].split('/')[2] - year == 0) && (adResponse[rek].date.split(' ')[0].split('/')[1] - (month + 1) == 0) && ((adResponse[rek].date.split(' ')[0].split('/')[0] - day) < 0)){
-				let index = adResponse.findIndex(el => el.id == adResponse[rek].id)
-				adResponse.splice(index,1)
-				rek = rek == 0 ? rek : rek - 1
-				write = 1
-			}
-			else if ((adResponse[rek].date.split(' ')[0].split('/')[2] - year == 0) && 
-					(adResponse[rek].date.split(' ')[0].split('/')[1] - (month + 1) == 0) &&
-					((adResponse[rek].date.split(' ')[0].split('/')[0] - day) == 0) &&
-					((adResponse[rek].date.split(' ')[2].split(':')[0] - hour) < 0)){
-				let index = adResponse.findIndex(el => el.id == adResponse[rek].id)
-				adResponse.splice(index,1)
-				rek = rek == 0 ? rek : rek - 1
-				write = 1
-			}
-			else if ((adResponse[rek].date.split(' ')[0].split('/')[2] - year == 0) && 
-					(adResponse[rek].date.split(' ')[0].split('/')[1] - (month + 1) == 0) &&
-					((adResponse[rek].date.split(' ')[0].split('/')[0] - day) == 0) &&
-					((adResponse[rek].date.split(' ')[2].split(':')[0] - hour) == 0) &&
-					((adResponse[rek].date.split(' ')[2].split(':')[1] - minut) < 0)){
-				let index = adResponse.findIndex(el => el.id == adResponse[rek].id)
-				adResponse.splice(index,1)
-				rek = rek == 0 ? rek : rek - 1
-				write = 1
+				ad = ad == 0 ? ad : ad - 1
+				write = true
 			}
 		}
+
 		for (let ad of adResponse){
-			if ((pendding == "pendding") && (!ad.isAccepts)){
+			if ((adminAd == "pendding") && (ad.isAccepts == "pendding")){
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
 				result.push(ad)
 			}
-			else if (ad.isAccepts && (!pendding)){
+			else if ((!adminAd) && (ad.isAccepts == "accepts")){
+				let user = userResponse.find(user => user.user_id == ad.user_id)
+				ad.user = user
+				delete ad.user_id
+				result.push(ad)
+			}
+			else if ((adminAd == "rejected") && (ad.isAccepts == "rejected")){
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
@@ -149,7 +121,7 @@ const POST = (request,response,next)=>{
 			subcategory,
 			watch_type,
 			link,
-			isAccepts: false,
+			isAccepts: 'pendding',
 			user_id: id
 		}
 		ads.push(newAd)
@@ -173,12 +145,16 @@ const ACTIVE = (request,response,next)=>{
 		const userResponse = request.select('users')
 		let found
 		for (let i of ads){
-			if(i.id == id && i.isAccepts){
+			if(i.id == id && i.isAccepts == 'accepts'){
 				i.active = i.active + 1
 				found = i
 				break
 			}
-			else if(i.id == id && !i.isAccepts){
+			if(i.id == id && i.isAccepts == 'pendding'){
+				found = i
+				break
+			}
+			if(i.id == id && i.isAccepts == 'rejected'){
 				found = i
 				break
 			}
@@ -195,21 +171,6 @@ const ACTIVE = (request,response,next)=>{
 	}
 }
 
-const DELETE = (request,response,next)=>{
-	try{
-		const { id } = request.body
-		const ads = request.select('advertisement')
-		let index = ads.findIndex(el => {
-			if((el.id == id) && !el.isAccepts ) return el
-		})
-		if(index == (-1))throw new ClientError(404,'Advertisement not found!')
-		ads.splice(index,1)
-		request.insert('advertisement',ads)
-		response.json({message: "Advertisement is rejected!"})
-	}catch(error){
-		return next(error)
-	}
-}
 
 const PUT = (request,response,next)=>{
 	try{
@@ -218,7 +179,7 @@ const PUT = (request,response,next)=>{
 		if (!id) throw new ClientError(400,'ID not entered!')
 		let found = ads.find(el => {
 			if(el.id == id){
-				el.isAccepts = true
+				el.isAccepts = (el.isAccepts == 'accepts' ? 'rejected' : 'accepts')
 				return el
 			}
 		})
@@ -234,6 +195,5 @@ module.exports = {
 	GET,
 	POST,
 	PUT,
-	DELETE,
 	ACTIVE,
 }
