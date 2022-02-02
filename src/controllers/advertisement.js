@@ -68,13 +68,14 @@ const GET = (request,response,next)=>{
 			}
 		}
 
-		let { date,category, subcategory,format,page = 1, limit = 5 } = request.query
+		let { date,category, subcategory,format,page = 1, limit = 5, search } = request.query
 		let filtered = []
 		for (let ad of result){
 			if((date ? (ad.date).includes(date): true) &&
 				(subcategory ? subcategory == ad.subcategory : true) &&
 				(format ? format == ad.watch_type : true) &&
-				(category ? category == ad.category : true)
+				(category ? category == ad.category : true) &&
+				(search ? (ad.user.first_name + ad.user.last_name).toLowerCase().includes(search.toLowerCase()):true )
 			){
 				filtered.push(ad)
 			}
