@@ -1,6 +1,6 @@
 const Joi = require('joi')
 const { ClientError } = require('../utils/error.js')
-
+const jwt =require('jsonwebtoken')
 const schemaLogin = Joi.object({
 	username: Joi.string().min(3).max(15).alphanum().required(),
 	password: Joi.string().min(2).max(8).required()
@@ -33,13 +33,27 @@ const validLogin = (request,response,next)=>{
 	try{
 		const { value, error } = schemaLogin.validate(request.body)
 		if(error) throw new ClientError(401,error)
+		request.adminId = jwt.verify(request.headers.token,'secret_key')
+		const { id } = request.adminId
+		if(id != 0)throw new ClientError(400,'Token invalid!')
 		return next()
 	}catch(error){
-		return next(error)
+		return response.json(error)
+	}
+}
+
+const valid = (request,response,next)=>{
+	try{	
+		const { id } = jwt.verify(request.headers.token, 'secret_key')
+		if(id != 0)throw new ClientError(400,'Token invalid!')
+		return next()
+	}catch(error){
+		return response.json(error)
 	}
 }
 
 module.exports = {
 	validAd,
-	validLogin
+	validLogin,
+	valid
 }
