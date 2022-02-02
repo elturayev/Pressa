@@ -68,7 +68,7 @@ const GET = (request,response,next)=>{
 			}
 		}
 
-		let { date,category, subcategory,format,page = 1, limit = 5, search } = request.query
+		let { date,category, subcategory,format,page = 1, limit = 6, search } = request.query
 		let filtered = []
 		for (let ad of result){
 			if((date ? (ad.date).includes(date): true) &&
