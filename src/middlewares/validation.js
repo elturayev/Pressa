@@ -33,9 +33,6 @@ const validLogin = (request,response,next)=>{
 	try{
 		const { value, error } = schemaLogin.validate(request.body)
 		if(error) throw new ClientError(401,error)
-		request.adminId = jwt.verify(request.headers.token,'secret_key')
-		const { id } = request.adminId
-		if(id != 0)throw new ClientError(400,'Token invalid!')
 		return next()
 	}catch(error){
 		return response.json(error)
