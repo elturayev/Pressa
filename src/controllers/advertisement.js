@@ -174,12 +174,17 @@ const ACTIVE = (request,response,next)=>{
 
 const PUT = (request,response,next)=>{
 	try{
-		const { id } = request.body
+		const { id,faol } = request.body
 		const ads = request.select('advertisement')
 		if (!id) throw new ClientError(400,'ID not entered!')
 		let found = ads.find(el => {
 			if(el.id == id){
-				el.isAccepts = (el.isAccepts == 'accepts' ? 'rejected' : 'accepts')
+				if(el.isAccepts == 'pendding'){
+					el.isAccepts = faol == 1 ? 'accepts': 'rejected'
+				}
+				else{
+					el.isAccepts = (el.isAccepts == 'accepts' ? 'rejected' : 'accepts')
+				}
 				return el
 			}
 		})
