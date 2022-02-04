@@ -191,7 +191,7 @@
         "subcategory": "Tarix",
         "watch_type": "ON",
         "link": "https://www.youtube.com/watch?v=qtFiwEkQNjM",
-        "isAccepts": "accepts",
+        "isAccepts": "pendding",
         "user_id": 4
     },
     {
@@ -281,7 +281,7 @@
         "subcategory": "Kimyo",
         "watch_type": "OFF",
         "link": "https://www.youtube.com/watch?v=qtFiwEkQNjM",
-        "isAccepts": "accepts",
+        "isAccepts": "pendding",
         "user_id": 3
     },
     {
@@ -312,6 +312,36 @@
         "watch_type": "ON",
         "link": "https://www.youtube.com/watch?v=qtFiwEkQNjM",
         "isAccepts": "rejected",
+        "user_id": 1
+    },
+    {
+        "id": 22,
+        "title": "Ilm olish sirlari!",
+        "short_description": "lm olish sirlari — barcha ilm talabida bo'lganlar ko'rishi kerak bo'lgan suhbat",
+        "description": "Ilmga ta’rif berishdan oldin uni hosil qilish haqida fikr yuritsak. Odamzod ilmni o’rganish orqaligina hosil qiladi. \nO’rganish esa kishining tafakkuri narsa va hodisotlarga kuchi yetganicha aniqlik kiritishidir. \nIlmni Odam bolasi yaratilgandan boshlab to’xtovsiz ravishda o’rganadi. Hatto o’lim ham insonni o’rganishdan to’xtatib qo’ya olmaydi.\n Jannat va do’zax hayotida ham o’rganish jarayoni to’xtovsiz va abadiy davom etadi. \nIlmni qisqacha biz o’rgangan narsa yoki narsalarning majmuyi desak bo’laveradi. \nOyoq kiyimni to’g’ri kiyishdan to quyoshning radiusini bilishgacha bo’lgan barcha narsa (undan uyog’i ham) ILMdir.\nBizga yoshligimizda o’rgatilgan yoki o’zimiz ixlos qo’ygan ustozlarimiz aytgan juda ko’p narsalarni ishonch bilan to’g’ri va haq deb bilamiz.\n Aslida esa har doim ham bunday bo’lmasligi mumkin. Gapimni isboti o’laroq so’nggi 20 yilda tabiiy fanlar sohasida qo’lga kiritilgan yutuqlarni misol qilib keltirishim mumkin. \nShu kunlargacha insoniyat bu sohalarda anchagina yanglish tushunchalar bilan yashab kelayotgani aniqlandi va hozirda ham fanda kamchiliklar yo’q emas ",
+        "img": "/images/mativ.jpg",
+        "date": "09/02/2022 17:00",
+        "active": 0,
+        "category": "IT",
+        "subcategory": "Dizayn",
+        "watch_type": "ON",
+        "link": "https://www.youtube.com/watch?v=qtFiwEkQNjM",
+        "isAccepts": "pendding",
+        "user_id": 1
+    },
+    {
+        "id": 23,
+        "title": "Ilm!",
+        "short_description": "lm olish sirlari — barcha ilm talabida bo'lganlar ko'rishi kerak bo'lgan suhbat",
+        "description": "Ilmga ta’rif berishdan oldin uni hosil qilish haqida fikr yuritsak. Odamzod ilmni o’rganish orqaligina hosil qiladi. \nO’rganish esa kishining tafakkuri narsa va hodisotlarga kuchi yetganicha aniqlik kiritishidir. \nIlmni Odam bolasi yaratilgandan boshlab to’xtovsiz ravishda o’rganadi. Hatto o’lim ham insonni o’rganishdan to’xtatib qo’ya olmaydi.\n Jannat va do’zax hayotida ham o’rganish jarayoni to’xtovsiz va abadiy davom etadi. \nIlmni qisqacha biz o’rgangan narsa yoki narsalarning majmuyi desak bo’laveradi. \nOyoq kiyimni to’g’ri kiyishdan to quyoshning radiusini bilishgacha bo’lgan barcha narsa (undan uyog’i ham) ILMdir.\nBizga yoshligimizda o’rgatilgan yoki o’zimiz ixlos qo’ygan ustozlarimiz aytgan juda ko’p narsalarni ishonch bilan to’g’ri va haq deb bilamiz.\n Aslida esa har doim ham bunday bo’lmasligi mumkin. Gapimni isboti o’laroq so’nggi 20 yilda tabiiy fanlar sohasida qo’lga kiritilgan yutuqlarni misol qilib keltirishim mumkin. \nShu kunlargacha insoniyat bu sohalarda anchagina yanglish tushunchalar bilan yashab kelayotgani aniqlandi va hozirda ham fanda kamchiliklar yo’q emas ",
+        "img": "/images/ilm_olish.jpg",
+        "date": "09/02/2022 17:00",
+        "active": 0,
+        "category": "IT",
+        "subcategory": "Dizayn",
+        "watch_type": "ON",
+        "link": "https://www.youtube.com/watch?v=qtFiwEkQNjM",
+        "isAccepts": "pendding",
         "user_id": 1
     }
 ]
