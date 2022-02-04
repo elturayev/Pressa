@@ -6,7 +6,7 @@ const GET = (request,response,next)=>{
 		let userResponse = request.select('users')
 		let { adminAd } = request.params
 		let result = []
-
+		let write
 		for (let ad = 0; ad < adResponse.length; ad++){
 			let dateReversed = adResponse[ad].date.split(' ')[0].split('/')
 			let resultDate = dateReversed[1]+'/'+dateReversed[0]+'/'+dateReversed[2]+' '+adResponse[ad].date.split(' ')[1]
@@ -18,7 +18,8 @@ const GET = (request,response,next)=>{
 				write = true
 			}
 		}
-
+		adResponse.sort((a, b) => (new Date(a.date.slice(3, 6) + a.date.slice(0, 3) + a.date.slice(6)).getTime()) >
+		(new Date(b.date.slice(3, 6) + b.date.slice(0, 3) + b.date.slice(6)).getTime()) ? 1 : -1)
 		for (let ad of adResponse){
 			if ((adminAd == "pendding") && (ad.isAccepts == "pendding")){
 				let user = userResponse.find(user => user.user_id == ad.user_id)
