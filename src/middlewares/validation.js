@@ -16,6 +16,7 @@ const validAd = (request,response,next)=>{
 				last_name,
 				contact
 			 } = request.body
+		if(!file) throw new ClientError(401,'The file must be uploaded!')
 		if(title.length > 200) throw new ClientError(413,'The title must be a maximum of 200 symbols!')
 		if(description.length > 2000) throw new ClientError(413,'The description must be a maximum of 1000 symbols!')
 		if(short_description > 200) throw new ClientError(413,'The short description must be a maximum of 200 symbols!')
