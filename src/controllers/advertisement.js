@@ -25,7 +25,7 @@ const GET = (request,response,next)=>{
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
-				result.push(ad)
+				result.unshift(ad)
 			}
 			else if ((!adminAd) && (ad.isAccepts == "accepts")){
 				let user = userResponse.find(user => user.user_id == ad.user_id)
@@ -37,7 +37,7 @@ const GET = (request,response,next)=>{
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
-				result.push(ad)
+				result.unshift(ad)
 			}
 		}
 
@@ -51,8 +51,7 @@ const GET = (request,response,next)=>{
 				(search ? (ad.user.first_name + ad.user.last_name).toLowerCase().includes(search.toLowerCase()):true )
 			){
 				filtered.push(ad)
-			}
-			
+			}	
 		}
 		filtered = filtered.slice(page*limit - limit, page*limit)
 		response.json(filtered)
