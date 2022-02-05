@@ -7,7 +7,7 @@ const LOGIN = (request,response,next)=>{
 		const { username, password } = request.body
 		const users = request.select('users')
 		let admin = users[0]
-		if(admin.name == username && admin.password == sha256(password)){
+		if((admin.name == username) && (admin.password == sha256(password))){
 			response.json({
 				status: 200,
 				message: "The admin is successfully on logged!",
