@@ -27,7 +27,7 @@ app.use((err,req,res,next)=>{
 	else {
 		res.status(500).json({
 			status:500,
-			message: "Internal Server Error!"
+			message: err.message
 		})
 	}
 })
