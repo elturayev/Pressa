@@ -181,7 +181,7 @@ const PUT = (request,response,next)=>{
 		let found = ads.find(el => {
 			if(el.id == id){
 				if(el.isAccepts == 'pendding'){
-					el.isAccepts = faol == 1 ? 'accepts': 'rejected'
+					el.isAccepts = (faol == 1 ? 'accepts': 'rejected')
 				}
 				else{
 					el.isAccepts = (el.isAccepts == 'accepts' ? 'rejected' : 'accepts')
