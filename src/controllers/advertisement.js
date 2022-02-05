@@ -131,8 +131,6 @@ const POST = (request,response,next)=>{
 		response.json({
 			message: "Advertisement created!"
 		})
-
-		return next()
 	}catch(error){
 		return next(error)
 	}
