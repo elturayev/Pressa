@@ -25,7 +25,7 @@ const GET = (request,response,next)=>{
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
-				result.unshift(ad)
+				result.push(ad)
 			}
 			else if ((!adminAd) && (ad.isAccepts == "accepts")){
 				let user = userResponse.find(user => user.user_id == ad.user_id)
@@ -37,7 +37,7 @@ const GET = (request,response,next)=>{
 				let user = userResponse.find(user => user.user_id == ad.user_id)
 				ad.user = user
 				delete ad.user_id
-				result.unshift(ad)
+				result.push(ad)
 			}
 		}
 
@@ -131,6 +131,7 @@ const POST = (request,response,next)=>{
 		response.json({
 			message: "Advertisement created!"
 		})
+		return next()
 	}catch(error){
 		return next(error)
 	}
